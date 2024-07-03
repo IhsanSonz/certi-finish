@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Certificate;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class CertificateController extends Controller
 {
@@ -14,7 +15,8 @@ class CertificateController extends Controller
      */
     public function index()
     {
-        //
+        $certificates = Certificate::all();
+        return view('certificate.index', compact('certificates'));
     }
 
     /**
@@ -24,7 +26,7 @@ class CertificateController extends Controller
      */
     public function create()
     {
-        //
+        return view('certificate.create');
     }
 
     /**
@@ -35,7 +37,20 @@ class CertificateController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $request->validate([
+            'certificate' => 'required|mimes:jpg,png|max:2048',
+        ]);
+
+        $file = $request->file('certificate');
+        $path = $file->store('uploads', 'public');
+
+        $certificate = new Certificate;
+        $certificate->title = $request->title;
+        $certificate->description = $request->description;
+        $certificate->layout = $path;
+        $certificate->save();
+
+        return redirect()->route('certificate.index');
     }
 
     /**
@@ -44,7 +59,7 @@ class CertificateController extends Controller
      * @param  \App\Models\Certificate  $certificate
      * @return \Illuminate\Http\Response
      */
-    public function show(Certificate $certificate)
+    public function show($id)
     {
         //
     }
@@ -55,7 +70,7 @@ class CertificateController extends Controller
      * @param  \App\Models\Certificate  $certificate
      * @return \Illuminate\Http\Response
      */
-    public function edit(Certificate $certificate)
+    public function edit($id)
     {
         //
     }
@@ -67,7 +82,7 @@ class CertificateController extends Controller
      * @param  \App\Models\Certificate  $certificate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Certificate $certificate)
+    public function update(Request $request)
     {
         //
     }
@@ -78,8 +93,11 @@ class CertificateController extends Controller
      * @param  \App\Models\Certificate  $certificate
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Certificate $certificate)
+    public function destroy($id)
     {
-        //
+        $certificate = Certificate::find($id);
+        $certificate->delete();
+
+        return redirect()->route('certificate.index');
     }
 }

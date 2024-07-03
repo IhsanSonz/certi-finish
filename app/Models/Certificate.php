@@ -9,6 +9,12 @@ class Certificate extends Model
 {
     use HasFactory;
 
+    protected $fillable = [
+        'title',
+        'description',
+        'layout',
+    ];
+
     /**
      * Get the comments for the blog post.
      */

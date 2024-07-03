@@ -13,40 +13,43 @@
 
 <body>
     <!-- As a heading -->
-    <nav class="navbar bg-body-tertiary">
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
         <div class="container-fluid">
-            <span class="navbar-brand mb-0 h1">CERTI-FINISH</span>
+            <a class="navbar-brand" href="#">CERTI-FINISH</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
+                aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNavDropdown">
+                <ul class="navbar-nav">
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Features</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="#">Pricing</a>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                            data-bs-toggle="dropdown" aria-expanded="false">
+                            Dropdown link
+                        </a>
+                        <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
+                            <li><a class="dropdown-item" href="#">Action</a></li>
+                            <li><a class="dropdown-item" href="#">Another action</a></li>
+                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                        </ul>
+                    </li>
+                </ul>
+            </div>
         </div>
     </nav>
 
     <div class="container-fluid">
 
         <div class="row">
-            <div class="col-sm-auto bg-default sticky-top">
-                <div class="d-flex flex-sm-column flex-row flex-nowrap bg-default align-items-center sticky-top">
-                    <ul
-                        class="nav nav-pills nav-flush flex-sm-column flex-row flex-nowrap mb-auto mx-auto text-center align-items-center">
-                        <li class="nav-item">
-                            <a href="{{ route('home') }}" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
-                                data-bs-placement="right" data-bs-original-title="Home">
-                                <i class="fa-solid fa-house text-black"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('home') }}" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
-                                data-bs-placement="right" data-bs-original-title="Master Data">
-                                <i class="fa-solid fa-table text-black"></i>
-                            </a>
-                        </li>
-                        <li>
-                            <a href="{{ route('home') }}" class="nav-link py-3 px-2" title="" data-bs-toggle="tooltip"
-                                data-bs-placement="right" data-bs-original-title="user Settings">
-                                <i class="fa-solid fa-circle-user text-black"></i>
-                            </a>
-                        </li>
-                    </ul>
-                </div>
-            </div>
             <div class="col-sm p-3 min-vh-100">
                 <div class="container-fluid">
 

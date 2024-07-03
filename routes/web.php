@@ -15,3 +15,10 @@ use App\Http\Controllers;
 */
 
 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
+
+Route::group(['prefix' => 'certificate', 'as' => 'certificate.'], function () {
+    Route::get('/', [Controllers\CertificateController::class, 'index'])->name('index');
+    Route::get('/create', [Controllers\CertificateController::class, 'create'])->name('create');
+    Route::post('/store', [Controllers\CertificateController::class, 'store'])->name('store');
+    Route::post('/destroy/{id}', [Controllers\CertificateController::class, 'destroy'])->name('destroy');
+});

@@ -14,11 +14,10 @@ class CreateAssesmentsTable extends Migration
     public function up()
     {
         Schema::create('assesments', function (Blueprint $table) {
-            $table->dropForeign(['certificates_id']);
-            $table->dropForeign(['participants_id']);
-
             $table->id();
             $table->integer('value')->nullable();
+            $table->bigInteger('certificates_id')->unsigned();
+            $table->bigInteger('participants_id')->unsigned();
             $table->timestamps();
 
             $table->foreign('certificates_id')
