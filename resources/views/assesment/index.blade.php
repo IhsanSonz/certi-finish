@@ -7,26 +7,28 @@
         <div class="col col-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">List Sertifikat</h5>
+                    <h5 class="card-title">List Pengisian Sertifikat</h5>
                     <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
 
                     <table class="table table-striped table-bordered">
                         <tr>
                             <th>#</th>
-                            <th>Title</th>
-                            <th>Description</th>
+                            <th>Sertifikat</th>
+                            <th>Peserta</th>
+                            <th>Nilai</th>
                             <th></th>
                         </tr>
-                        @foreach ($certificates as $certificate)
+                        @foreach ($assesments as $assesment)
                         <tr>
                             <td>{{ $loop->index + 1 }}</td>
-                            <td>{{ $certificate->title }}</td>
-                            <td>{!! nl2br($certificate->description) !!}</td>
+                            <td>{{ $assesment->title }}</td>
+                            <td>{{ $assesment->name }}</td>
+                            <td>{{ $assesment->value }}</td>
                             <td>
-                                <a href="{{ route('certificate.create') }}" class="btn btn-sm btn-primary">
+                                <a href="{{ route('assesment.show', ['id' => $assesment->id] ) }}" target="blank" class="btn btn-sm btn-primary">
                                     <i class="fa-solid fa-eye"></i>
                                 </a>
-                                <form action="{{ route('certificate.destroy', ['id' => $certificate->id]) }}" method="post" class="d-inline">
+                                <form action="{{ route('assesment.destroy', ['id' => $assesment->id]) }}" method="post" class="d-inline">
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-danger"
                                         onclick="if (!confirm('Anda yakin akan menghapus data ini?')) {return false;}">
@@ -38,7 +40,7 @@
                         @endforeach
                     </table>
 
-                    <a href="{{ route('certificate.create') }}" class="btn btn-primary">Go somewhere</a>
+                    <a href="{{ route('assesment.create') }}" class="btn btn-primary">Go somewhere</a>
                 </div>
             </div>
         </div>

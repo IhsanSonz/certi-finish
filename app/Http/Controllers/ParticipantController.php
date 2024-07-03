@@ -14,7 +14,8 @@ class ParticipantController extends Controller
      */
     public function index()
     {
-        //
+        $participants = Participant::all();
+        return view('participant.index', compact('participants'));
     }
 
     /**
@@ -24,7 +25,7 @@ class ParticipantController extends Controller
      */
     public function create()
     {
-        //
+        return view('participant.create');
     }
 
     /**
@@ -35,7 +36,12 @@ class ParticipantController extends Controller
      */
     public function store(Request $request)
     {
-        //
+        $participant = new Participant;
+        $participant->name = $request->name;
+        $participant->birth_date = $request->birth_date;
+        $participant->save();
+
+        return redirect()->route('participant.index');
     }
 
     /**
@@ -44,7 +50,7 @@ class ParticipantController extends Controller
      * @param  \App\Models\Participant  $participant
      * @return \Illuminate\Http\Response
      */
-    public function show(Participant $participant)
+    public function show($id)
     {
         //
     }
@@ -55,7 +61,7 @@ class ParticipantController extends Controller
      * @param  \App\Models\Participant  $participant
      * @return \Illuminate\Http\Response
      */
-    public function edit(Participant $participant)
+    public function edit($id)
     {
         //
     }
@@ -67,7 +73,7 @@ class ParticipantController extends Controller
      * @param  \App\Models\Participant  $participant
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request, Participant $participant)
+    public function update(Request $request, $id)
     {
         //
     }
@@ -78,8 +84,11 @@ class ParticipantController extends Controller
      * @param  \App\Models\Participant  $participant
      * @return \Illuminate\Http\Response
      */
-    public function destroy(Participant $participant)
+    public function destroy($id)
     {
-        //
+        $participant = Participant::find($id);
+        $participant->delete();
+
+        return redirect()->route('participant.index');
     }
 }
