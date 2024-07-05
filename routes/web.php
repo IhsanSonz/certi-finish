@@ -16,6 +16,17 @@ use App\Http\Controllers;
 
 Route::get('/', [Controllers\HomeController::class, 'index'])->name('home');
 
+Route::get('/login', [Controllers\AuthController::class, 'login'])->name('login');
+Route::post('/authenticate', [Controllers\AuthController::class, 'authenticate'])->name('authenticate');
+Route::get('/logout', [Controllers\AuthController::class, 'logout'])->name('logout');
+
+Route::group(['prefix' => 'user', 'as' => 'user.'], function () {
+    Route::get('/', [Controllers\UserController::class, 'index'])->name('index');
+    Route::get('/create', [Controllers\UserController::class, 'create'])->name('create');
+    Route::post('/store', [Controllers\UserController::class, 'store'])->name('store');
+    Route::post('/destroy/{id}', [Controllers\UserController::class, 'destroy'])->name('destroy');
+});
+
 Route::group(['prefix' => 'certificate', 'as' => 'certificate.'], function () {
     Route::get('/', [Controllers\CertificateController::class, 'index'])->name('index');
     Route::get('/create', [Controllers\CertificateController::class, 'create'])->name('create');
