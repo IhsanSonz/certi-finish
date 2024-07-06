@@ -72,7 +72,8 @@ class CertificateController extends Controller
      */
     public function edit($id)
     {
-        //
+        $certificate = Certificate::find($id);
+        return view('certificate.edit', compact('certificate'));
     }
 
     /**
@@ -82,10 +83,17 @@ class CertificateController extends Controller
      * @param  \App\Models\Certificate  $certificate
      * @return \Illuminate\Http\Response
      */
-    public function update(Request $request)
+    public function update(Request $request,$id)
     {
-        //
-    }
+    $certificate = Certificate::find($id); // Menggunakan find dengan parameter $id
+    $certificate->title = $request->title;
+    $certificate->description = $request->description;
+
+
+    $certificate->save();
+
+    return redirect()->route('certificate.index');
+}
 
     /**
      * Remove the specified resource from storage.

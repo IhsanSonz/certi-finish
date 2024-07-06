@@ -63,7 +63,9 @@ class ParticipantController extends Controller
      */
     public function edit($id)
     {
-        //
+        $participant = Participant::find($id);
+        return view('participant.edit', compact('participant'));
+
     }
 
     /**
@@ -75,7 +77,12 @@ class ParticipantController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $participant = Participant::find($id);
+        $participant->name = $request->name;
+        $participant->birth_date = $request->birth_date;
+        $participant->save();
+
+        return redirect()->route('participant.index');
     }
 
     /**
@@ -87,7 +94,11 @@ class ParticipantController extends Controller
     public function destroy($id)
     {
         $participant = Participant::find($id);
-        $participant->delete();
+        if ($participant) {
+            // Hapus semua assesments yang berkaitan
+            $participant->assesments()->delete();
+            $participant->delete();
+        }
 
         return redirect()->route('participant.index');
     }

@@ -10,14 +10,14 @@
                 <div class="card">
                     <div class="card-body">
                         <h5 class="card-title">Masukkan Data User Baru</h5>
-                        <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
+                        <br>
                         <div class="mb-3">
                             <label for="name" class="form-label">Name</label>
-                            <input class="form-control" name="name" id="name" type="text" placeholder="Default input" required />
+                            <input class="form-control" name="name" id="name" type="text" placeholder="Masukan Nama" required />
                         </div>
                         <div class="mb-3">
                             <label for="username" class="form-label">Username</label>
-                            <input class="form-control" name="username" id="username" type="text" placeholder="Default input" required />
+                            <input class="form-control" name="username" id="username" type="text" placeholder="Masukan Username" required />
                         </div>
                         <div class="mb-3">
                           <label for="password" class="form-label">password</label>

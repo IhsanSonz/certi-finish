@@ -2,18 +2,23 @@
 
 namespace App\Models;
 
-use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Participant extends Model
 {
-    use HasFactory;
+    protected static function boot()
+    {
+        parent::boot();
 
-    /**
-     * Get the comments for the blog post.
-     */
+        static::deleting(function ($participant) {
+            $participant->assesments()->delete();
+        });
+    }
+
     public function assesments(): HasMany
     {
-        return $this->hasMany(Assesment::class);
+        return $this->hasMany(Assesment::class, 'participants_id');
     }
 }
+

@@ -18,12 +18,16 @@ class AssesmentController extends Controller
      */
     public function index()
     {
-        $assesments = DB::select("SELECT a.id, c.title, b.name, a.value
+        $assesments = DB::select("
+            SELECT a.id, c.title, b.name, a.value
             FROM assesments a
             INNER JOIN participants b ON a.participants_id = b.id
-            INNER JOIN certificates c ON a.certificates_id = c.id");
+            INNER JOIN certificates c ON a.certificates_id = c.id
+        ");
+
         return view('assesment.index', compact('assesments'));
     }
+
 
     /**
      * Show the form for creating a new resource.
@@ -110,9 +114,9 @@ class AssesmentController extends Controller
      */
     public function edit($id)
     {
-        //
+    $assesment = Assesment::find($id); // Ambil data assesment dengan id yang sesuai
+    return view('assesment.edit', compact('assesment'));
     }
-
     /**
      * Update the specified resource in storage.
      *
@@ -122,7 +126,14 @@ class AssesmentController extends Controller
      */
     public function update(Request $request, $id)
     {
-        //
+        $assesment = Assesment::find($id);
+        if ($assesment) {
+            $assesment->value = $request->input('value');
+            // Hanya update field yang diinginkan
+            $assesment->save();
+        }
+        
+        return redirect()->route('assesment.index');
     }
 
     /**
