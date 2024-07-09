@@ -32,14 +32,20 @@ Route::group(['prefix' => 'certificate', 'as' => 'certificate.'], function () {
     Route::get('/create', [Controllers\CertificateController::class, 'create'])->name('create');
     Route::post('/store', [Controllers\CertificateController::class, 'store'])->name('store');
     Route::post('/destroy/{id}', [Controllers\CertificateController::class, 'destroy'])->name('destroy');
+    Route::get('/{id}/edit', [Controllers\CertificateController::class, 'edit'])->name('edit'); // Mengubah URL menjadi '/{id}/edit'
+    Route::put('/certificate/{id}', [Controllers\CertificateController::class, 'update'])->name('update');
+
 });
 
 Route::group(['prefix' => 'participant', 'as' => 'participant.'], function () {
     Route::get('/', [Controllers\ParticipantController::class, 'index'])->name('index');
     Route::get('/create', [Controllers\ParticipantController::class, 'create'])->name('create');
     Route::post('/store', [Controllers\ParticipantController::class, 'store'])->name('store');
-    Route::post('/destroy/{id}', [Controllers\ParticipantController::class, 'destroy'])->name('destroy');
+    Route::delete('/destroy/{id}', [Controllers\ParticipantController::class, 'destroy'])->name('destroy');
+    Route::get('/{id}/edit', [Controllers\ParticipantController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [Controllers\ParticipantController::class, 'update'])->name('update');
 });
+
 
 Route::group(['prefix' => 'assesment', 'as' => 'assesment.'], function () {
     Route::get('/', [Controllers\AssesmentController::class, 'index'])->name('index');
@@ -47,4 +53,6 @@ Route::group(['prefix' => 'assesment', 'as' => 'assesment.'], function () {
     Route::get('/create', [Controllers\AssesmentController::class, 'create'])->name('create');
     Route::post('/store', [Controllers\AssesmentController::class, 'store'])->name('store');
     Route::post('/destroy/{id}', [Controllers\AssesmentController::class, 'destroy'])->name('destroy');
+    Route::get('/{id}/edit', [App\Http\Controllers\AssesmentController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [App\Http\Controllers\AssesmentController::class, 'update'])->name('update');
 });

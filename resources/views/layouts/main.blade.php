@@ -13,7 +13,7 @@
 
 <body>
     <!-- As a heading -->
-    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             {{-- <a class="navbar-brand" href="{{ route('home') }}">CERTI-FINISH</a> --}}
             <a class="navbar-brand" href="{{ route('home') }}">KELOMPOK 2 WEB</a>
@@ -27,20 +27,19 @@
                         <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Features</a>
+                        <a class="nav-link" href="{{ route('user.index') }}">User</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="#">Pricing</a>
+                        <a class="nav-link" href="{{ route('participant.index') }}">Peserta</a>
                     </li>
                     <li class="nav-item dropdown">
                         <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
-                            Dropdown link
+                            Sertifikasi
                         </a>
                         <ul class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink">
-                            <li><a class="dropdown-item" href="#">Action</a></li>
-                            <li><a class="dropdown-item" href="#">Another action</a></li>
-                            <li><a class="dropdown-item" href="#">Something else here</a></li>
+                            <li><a class="dropdown-item" href="{{ route('certificate.index') }}">Data Sertifikat</a></li>
+                            <li><a class="dropdown-item" href="{{ route('assesment.index') }}">Data Pengisian Sertifikat</a></li>
                         </ul>
                     </li>
                 </ul>
@@ -55,6 +54,7 @@
                         <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                     </li>
                 </ul>
+
                 @else
                     <ul class="navbar-nav">
                         <li class="nav-item">

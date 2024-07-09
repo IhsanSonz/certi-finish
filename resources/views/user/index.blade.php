@@ -8,8 +8,6 @@
             <div class="card">
                 <div class="card-body">
                     <h5 class="card-title">List User</h5>
-                    <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-
                     <table class="table table-striped table-bordered">
                         <tr>
                             <th>#</th>
@@ -24,7 +22,7 @@
                             <td>{{ $user->username }}</td>
                             <td>
                                 <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">
-                                    <i class="fa-solid fa-eye"></i>
+                                    <i class="fa-solid fa-edit">edit</i>
                                 </a>
                                 <form action="{{ route('user.destroy', ['id' => $user->id]) }}" method="post" class="d-inline">
                                     @csrf
@@ -38,7 +36,7 @@
                         @endforeach
                     </table>
 
-                    <a href="{{ route('user.create') }}" class="btn btn-primary">Go somewhere</a>
+                    <a href="{{ route('user.create') }}" class="btn btn-primary">Buat User Baru</a>
                 </div>
             </div>
         </div>
