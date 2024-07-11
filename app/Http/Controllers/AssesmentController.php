@@ -8,6 +8,8 @@ use App\Models\Participant;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Storage;
+use PhpOffice\PhpSpreadsheet\Spreadsheet;
+use PhpOffice\PhpSpreadsheet\Writer\Xlsx;
 
 class AssesmentController extends Controller
 {
@@ -59,7 +61,7 @@ class AssesmentController extends Controller
             ['path' => $request->url(), 'query' => $request->query()]
         );
 
-        return view('assesment.index', compact('assesments'));
+        return view('assesment.index', compact('assesments', 'search'));
     }
 
 //Penutup pagging
@@ -184,5 +186,53 @@ class AssesmentController extends Controller
         $assesment->delete();
 
         return redirect()->route('assesment.index');
+    }
+
+    public function exportExcel(Request $request)
+    {
+        $search = $request->get('search');
+
+        $query = DB::table('assesments')
+            ->join('participants', 'assesments.participants_id', '=', 'participants.id')
+            ->join('certificates', 'assesments.certificates_id', '=', 'certificates.id')
+            ->select('assesments.id', 'certificates.title', 'participants.name', 'participants.birth_date', 'assesments.value');
+
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('certificates.title', 'like', "%{$search}%")
+                    ->orWhere('participants.name', 'like', "%{$search}%");
+            });
+        }
+
+        $assesments = $query->get();
+
+        $spreadsheet = new Spreadsheet();
+        $sheet = $spreadsheet->getActiveSheet();
+
+        $sheet->setCellValue('A1', 'ID');
+        $sheet->setCellValue('B1', 'Certificate Title');
+        $sheet->setCellValue('C1', 'Participant Name');
+        $sheet->setCellValue('D1', 'Participant Birth Date');
+        $sheet->setCellValue('E1', 'Assesment Score');
+
+        $row = 2;
+        foreach($assesments as $assesment) {
+            $sheet->setCellValue('A' . $row, $assesment->id);
+            $sheet->setCellValue('B' . $row, $assesment->title);
+            $sheet->setCellValue('C' . $row, $assesment->name);
+            $sheet->setCellValue('D' . $row, $assesment->birth_date);
+            $sheet->setCellValue('E' . $row, $assesment->value);
+            $row++;
+        }
+
+        $writer = new Xlsx($spreadsheet);
+        $filename = 'list-assesments-' . date('Ymd') . '.xlsx';
+
+        header('Content-Type: application/vnd.openxmlformats-officedocument.spreadsheetml.sheet');
+        header('Content-Disposition: attachment; filename="' . $filename . '"');
+        header('Cache-Control: max-age=0');
+
+        $writer->save('php://output');
+        exit;
     }
 }
