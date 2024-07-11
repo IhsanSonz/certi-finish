@@ -55,4 +55,5 @@ Route::group(['prefix' => 'assesment', 'as' => 'assesment.', 'middleware' => 'au
     Route::post('/destroy/{id}', [Controllers\AssesmentController::class, 'destroy'])->name('destroy');
     Route::get('/{id}/edit', [App\Http\Controllers\AssesmentController::class, 'edit'])->name('edit');
     Route::put('/{id}', [App\Http\Controllers\AssesmentController::class, 'update'])->name('update');
+    Route::get('/export-excel', [Controllers\AssesmentController::class, 'exportExcel'])->name('export-excel');
 });

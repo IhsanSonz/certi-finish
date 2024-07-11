@@ -62,6 +62,7 @@
                     @endif
 
                     <a href="{{ route('assesment.create') }}" class="btn btn-primary">Tambah Sertifikat Peserta</a>
+                    <a href="{{ route('assesment.export-excel', ['search' => $search]) }}" class="btn btn-default">Export to Excel</a>
                 </div>
             </div>
         </div>
