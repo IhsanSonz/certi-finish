@@ -16,17 +16,53 @@ class AssesmentController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $assesments = DB::select("
-            SELECT a.id, c.title, b.name, a.value
-            FROM assesments a
-            INNER JOIN participants b ON a.participants_id = b.id
-            INNER JOIN certificates c ON a.certificates_id = c.id
-        ");
+//search
+        $search = $request->get('search');
+        // Menyusun query
+        $query = DB::table('assesments')
+            ->join('participants', 'assesments.participants_id', '=', 'participants.id')
+            ->join('certificates', 'assesments.certificates_id', '=', 'certificates.id')
+            ->select('assesments.id', 'certificates.title', 'participants.name', 'assesments.value');
+
+        // Menambahkan kondisi pencarian jika ada
+        if (!empty($search)) {
+            $query->where(function ($q) use ($search) {
+                $q->where('certificates.title', 'like', "%{$search}%")
+                    ->orWhere('participants.name', 'like', "%{$search}%");
+            });
+        }
+//penutup search
+
+//pagging
+
+        // jumlah item crud per halaman
+        $perPage = 5;
+
+        $total = $query->count();
+        // Mengambil halaman saat ini
+        $page = $request->get('page', 1);
+
+        // Menghitung offset
+        $offset = ($page - 1) * $perPage;
+
+        // Mendapatkan data dengan limit dan offset
+        $assesments = $query->offset($offset)->limit($perPage)->get();
+
+        // Membuat paginator manual
+        $assesments = new \Illuminate\Pagination\LengthAwarePaginator(
+            $assesments,
+            $total,
+            $perPage,
+            $page,
+            ['path' => $request->url(), 'query' => $request->query()]
+        );
 
         return view('assesment.index', compact('assesments'));
     }
+
+//Penutup pagging
 
 
     /**
@@ -132,7 +168,7 @@ class AssesmentController extends Controller
             // Hanya update field yang diinginkan
             $assesment->save();
         }
-        
+
         return redirect()->route('assesment.index');
     }
 
