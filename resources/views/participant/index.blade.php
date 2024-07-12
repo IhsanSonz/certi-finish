@@ -7,12 +7,12 @@
         <div class="col col-12">
             <div class="card">
                 <div class="card-body">
-                    <h5 class="card-title">List Peserta</h5>
+                    <h5 class="card-title">List Peserta Yang Terdaftar Dalam Pengisian Sertifikat</h5>
 
                     <table class="table table-striped table-bordered">
                         <thead>
                             <tr>
-                                <th>#</th>
+                                <th>No</th>
                                 <th>Name</th>
                                 <th>Date of Birth</th>
                                 <th>Actions</th>
@@ -41,7 +41,7 @@
                         </tbody>
                     </table>
 
-                    <a href="{{ route('participant.create') }}" class="btn btn-primary">Buat Peserta Baru</a>
+                <!--  <a href="{{ route('participant.create') }}" class="btn btn-primary">Buat Peserta Baru</a> -->
                 </div>
             </div>
         </div>

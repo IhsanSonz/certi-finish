@@ -29,7 +29,7 @@
 
                             <button type="submit" name="submit" class="btn btn-primary btn-block">Sign In</button>
                             <div class="form-footer mt-2">
-                                <p> Belum punya account? <a href="register.php">Register</a></p>
+                                <p> Belum punya account? <a href="{{ route('register') }}">Register</a></p> <!-- Updated link -->
                             </div>
                         </form>
                     </section>

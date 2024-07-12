@@ -13,7 +13,7 @@
                         <p class="card-text">Silakan Masukan Sertifikat yang ingin dibuat.</p>
                         <div class="mb-3">
                             <label for="title" class="form-label">Nama Sertifikat</label>
-                            <input class="form-control" name="title" id="title" type="text" placeholder=".....">
+                            <input class="form-control" name="title" id="title" type="text" placeholder="Masukan Nama Sertifikat">
                         </div>
                         <div class="mb-3">
                           <label for="description" class="form-label">Description</label>

@@ -20,6 +20,12 @@ Route::get('/login', [Controllers\AuthController::class, 'login'])->name('login'
 Route::post('/authenticate', [Controllers\AuthController::class, 'authenticate'])->name('authenticate');
 Route::get('/logout', [Controllers\AuthController::class, 'logout'])->name('logout');
 
+use App\Http\Controllers\RegisterController;
+
+Route::get('/register', [RegisterController::class, 'showRegistrationForm'])->name('register');
+Route::post('/register', [RegisterController::class, 'register']);
+
+
 Route::group(['prefix' => 'user', 'as' => 'user.', 'middleware' => 'auth'], function () {
     Route::get('/', [Controllers\UserController::class, 'index'])->name('index');
     Route::get('/create', [Controllers\UserController::class, 'create'])->name('create');
@@ -52,8 +58,9 @@ Route::group(['prefix' => 'assesment', 'as' => 'assesment.', 'middleware' => 'au
     Route::get('/show/{id}', [Controllers\AssesmentController::class, 'show'])->name('show');
     Route::get('/create', [Controllers\AssesmentController::class, 'create'])->name('create');
     Route::post('/store', [Controllers\AssesmentController::class, 'store'])->name('store');
-    Route::post('/destroy/{id}', [Controllers\AssesmentController::class, 'destroy'])->name('destroy');
-    Route::get('/{id}/edit', [App\Http\Controllers\AssesmentController::class, 'edit'])->name('edit');
-    Route::put('/{id}', [App\Http\Controllers\AssesmentController::class, 'update'])->name('update');
+    Route::delete('/destroy/{id}', [Controllers\AssesmentController::class, 'destroy'])->name('destroy');  // Ubah ini ke DELETE
+    Route::get('/{id}/edit', [Controllers\AssesmentController::class, 'edit'])->name('edit');
+    Route::put('/{id}', [Controllers\AssesmentController::class, 'update'])->name('update');
     Route::get('/export-excel', [Controllers\AssesmentController::class, 'exportExcel'])->name('export-excel');
 });
+
