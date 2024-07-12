@@ -17,10 +17,10 @@
                         </div>
                     </form>
 
-                    @if (!empty($assesments))
+                    @if ($assesments->isNotEmpty())
                         <table class="table table-striped table-bordered">
                             <tr>
-                                <th>#</th>
+                                <th>No</th>
                                 <th>Sertifikat</th>
                                 <th>Peserta</th>
                                 <th>Score</th>
@@ -40,11 +40,10 @@
                                     <a href="{{ route('assesment.edit', ['id' => $assesment->id] ) }}" class="btn btn-sm btn-warning">
                                         <i class="fa-solid fa-edit"></i>
                                     </a>
-                                    <form action="{{ route('assesment.destroy', ['id' => $assesment->id]) }}" method="post" class="d-inline">
+                                    <form action="{{ route('assesment.destroy', ['id' => $assesment->id]) }}" method="POST" class="d-inline">
                                         @csrf
                                         @method('DELETE')
-                                        <button type="submit" class="btn btn-sm btn-danger"
-                                            onclick="if (!confirm('Anda yakin akan menghapus data ini?')) {return false;}">
+                                        <button type="submit" class="btn btn-sm btn-danger" onclick="return confirm('Anda yakin akan menghapus data ini?');">
                                             <i class="fa-solid fa-trash"></i>
                                         </button>
                                     </form>
@@ -62,7 +61,8 @@
                     @endif
 
                     <a href="{{ route('assesment.create') }}" class="btn btn-primary">Tambah Sertifikat Peserta</a>
-                    <a href="{{ route('assesment.export-excel', ['search' => $search]) }}" class="btn btn-default">Export to Excel</a>
+                    <br><br>
+                    <a href="{{ route('assesment.export-excel', ['search' => request()->query('search')]) }}" class="btn btn-primary">Export to Excel</a>
                 </div>
             </div>
         </div>

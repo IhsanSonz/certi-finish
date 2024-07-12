@@ -10,9 +10,10 @@
                     <h5 class="card-title">List User</h5>
                     <table class="table table-striped table-bordered">
                         <tr>
-                            <th>#</th>
+                            <th>No</th>
                             <th>Name</th>
                             <th>Username</th>
+                            <th>email</th>
                             <th></th>
                         </tr>
                         @foreach ($users as $user)
@@ -20,10 +21,8 @@
                             <td>{{ $loop->index + 1 }}</td>
                             <td>{{ $user->name }}</td>
                             <td>{{ $user->username }}</td>
+                            <td>{{ $user->email }}</td>
                             <td>
-                                <a href="{{ route('user.create') }}" class="btn btn-sm btn-primary">
-                                    <i class="fa-solid fa-edit">edit</i>
-                                </a>
                                 <form action="{{ route('user.destroy', ['id' => $user->id]) }}" method="post" class="d-inline">
                                     @csrf
                                     <button type="submit" class="btn btn-sm btn-danger"

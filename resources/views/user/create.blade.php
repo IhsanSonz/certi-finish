@@ -20,6 +20,10 @@
                             <input class="form-control" name="username" id="username" type="text" placeholder="Masukan Username" required />
                         </div>
                         <div class="mb-3">
+                            <label for="username" class="form-label">Email</label>
+                            <input class="form-control" name="email" id="email" type="text" placeholder="Masukan email" required />
+                        </div>
+                        <div class="mb-3">
                           <label for="password" class="form-label">password</label>
                           <input type="password" class="form-control" name="password" required />
                         </div>

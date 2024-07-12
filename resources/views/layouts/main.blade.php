@@ -9,6 +9,14 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.2/css/all.min.css"
         integrity="sha512-SnH5WK+bZxgPHs44uWIX+LLJAJ9/2PkPKZ5QiAj6Ta86w+fsb2TkcmfRyVX3pBnMFcV7oQPJkl9QevSCWr3W6A=="
         crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+        <style>
+            .nav-item-separator {
+                border-left: 1px solid #ccc;
+                margin-left: 15px;
+                padding-left: 15px;
+            }
+        </style>
 </head>
 
 <body>
@@ -16,7 +24,7 @@
     <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
         <div class="container-fluid">
             {{-- <a class="navbar-brand" href="{{ route('home') }}">CERTI-FINISH</a> --}}
-            <a class="navbar-brand" href="{{ route('home') }}">KELOMPOK 2 WEB</a>
+            <a class="navbar-brand" href="{{ route('home') }}">E-SERTIFICATE</a>
             <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNavDropdown"
                 aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
                 <span class="navbar-toggler-icon"></span>
@@ -24,16 +32,13 @@
             <div class="collapse navbar-collapse" id="navbarNavDropdown">
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="{{ route('home') }}">Home</a>
+                        <a class="nav-link {{ Route::currentRouteName() == 'home' ? 'active' : '' }}" aria-current="page" href="{{ route('home') }}">Home</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('user.index') }}">User</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ route('participant.index') }}">Peserta</a>
+                        <a class="nav-link {{ Route::currentRouteName() == 'participant.index' ? 'active' : '' }}" href="{{ route('participant.index') }}">Peserta</a>
                     </li>
                     <li class="nav-item dropdown">
-                        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" role="button"
+                        <a class="nav-link dropdown-toggle {{ Route::currentRouteName() =='certificate.index' ? 'active' : '' }}" href="#" id="navbarDropdownMenuLink" role="button"
                             data-bs-toggle="dropdown" aria-expanded="false">
                             Sertifikasi
                         </a>
@@ -48,9 +53,9 @@
                 @if (Auth::check())
                 <ul class="navbar-nav">
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ route('home') }}">{{ Auth::user()->username }}</a>
+                        <a class="nav-link" href="{{ route('user.index') }}">{{ Auth::user()->username }}</a>
                     </li>
-                    <li class="nav-item">
+                    <li class="nav-item nav-item-separator">
                         <a class="nav-link" href="{{ route('logout') }}">Logout</a>
                     </li>
                 </ul>
